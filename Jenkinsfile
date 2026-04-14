@@ -9,16 +9,14 @@ pipeline {
         stage('Tests') {
             steps {
                 sh '''
-                    python3 -m venv venv
-                    chmod -R 755 venv
-                    venv/bin/pip install pytest
-                    venv/bin/pytest tests/ -v
+                    pip3 install pytest --break-system-packages
+                    python3 -m pytest tests/ -v
                 '''
             }
         }
         stage('Nettoyage') {
             steps {
-                sh 'rm -rf venv'
+                echo "Nettoyage terminé"
             }
         }
     }
